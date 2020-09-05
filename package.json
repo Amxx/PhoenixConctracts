@@ -1,0 +1,17 @@
+{
+  "name": "phoenix-contract",
+  "version": "1.0.0",
+  "author": "Hadrien Croubois (@Amxx)",
+  "license": "MIT",
+  "scripts": {
+		"build": "oz compile",
+    "test": "mocha --exit --recursive"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@openzeppelin/cli": "^2.8.2",
+    "@openzeppelin/test-environment": "^0.1.4",
+    "@openzeppelin/test-helpers": "^0.5.6",
+    "mocha": "^8.1.3"
+  }
+}
