@@ -9,13 +9,15 @@ contract WalletLogic is PhoenixCore {
 
     event Initialized(address owner);
 
+    receive() external payable {}
+
     function initialize(address admin) external {
         require(owner == address(0));
         owner = admin;
         emit Initialized(admin);
     }
 
-    function execute(address to, uint256 value, bytes calldata data) external returns (bool success, bytes memory returndata){
+    function execute(address to, uint256 value, bytes calldata data) external payable returns (bool success, bytes memory returndata){
         require(msg.sender == owner);
         (success, returndata) = to.call{value: value}(data);
     }

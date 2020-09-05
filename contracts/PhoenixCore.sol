@@ -8,7 +8,7 @@ abstract contract PhoenixCore {
     address public factory;
 
     function _attach(address link) internal {
-        require(factory == address(0));
+        require(factory == address(0), 'PhoenixCore: already attached');
         factory = link;
     }
 

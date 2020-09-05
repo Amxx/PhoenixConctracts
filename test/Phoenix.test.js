@@ -78,7 +78,7 @@ describe('PhoenixStack', function () {
 
 			await expectRevert(
 				this.factory.instanciate(this.id, this.master, this.init3, { from: charles }),
-				'reinstanciation-pevented-by-lock'
+				'PhoenixFactory: prevented by lock'
 			);
 		});
 	});

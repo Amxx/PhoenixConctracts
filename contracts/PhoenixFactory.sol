@@ -13,7 +13,7 @@ contract PhoenixFactory is IPhoenixFactory {
         emit NewProxy(id, address(proxy));
         // check restriction
         bytes32 lock = _locks[address(proxy)];
-        require(lock == bytes32(0) || lock == keccak256(abi.encode(master, init)), 'reinstanciation-pevented-by-lock');
+        require(lock == bytes32(0) || lock == keccak256(abi.encode(master, init)), 'PhoenixFactory: prevented by lock');
         delete _locks[address(proxy)];
         // initialize
         proxy.initialize(master, init);
@@ -21,7 +21,7 @@ contract PhoenixFactory is IPhoenixFactory {
     }
 
     function lock(address entry, bytes32 next) external override {
-        require(_locks[entry] == bytes32(0), 'cannot-override-lock');
+        require(_locks[entry] == bytes32(0), 'PhoenixFactory: cannot override lock');
         _locks[entry] = next;
         emit Lock(entry, next);
     }

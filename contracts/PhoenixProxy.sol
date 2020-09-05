@@ -11,7 +11,7 @@ contract PhoenixProxy is UpgradeableProxy, PhoenixCore {
     }
 
     function initialize(address _logic, bytes memory _data) public payable {
-        require(_implementation() == address(0));
+        require(_implementation() == address(0), 'PhoenixProxy: already initialized');
         _setImplementation(_logic);
         if(_data.length > 0) {
             (bool success,) = _logic.delegatecall(_data);
