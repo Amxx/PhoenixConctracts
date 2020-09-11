@@ -4,7 +4,7 @@
   "author": "Hadrien Croubois (@Amxx)",
   "license": "MIT",
   "scripts": {
-		"build": "oz compile",
+    "build": "oz compile",
     "test": "mocha --exit --recursive"
   },
   "dependencies": {},

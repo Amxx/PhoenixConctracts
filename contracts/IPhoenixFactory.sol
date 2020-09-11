@@ -9,4 +9,5 @@ interface IPhoenixFactory {
     function instanciate(bytes32 id, address master, bytes calldata init) external returns (address);
     function lock(address entry, bytes32 next) external;
     function lockOverride(bytes32 next) external;
+    function predict(bytes32 id) external view returns (address);
 }

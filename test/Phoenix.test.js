@@ -14,18 +14,19 @@ describe('PhoenixStack', function () {
 	});
 
 	it('initialize', async function () {
-		const id     = web3.utils.randomHex(32);
-		const master = this.wallet.address;
-		const init   = this.wallet.contract.methods.initialize(alice).encodeABI();
-		const receipt = await this.factory.instanciate(id, master, init, { from: alice });
-		const proxy = await WalletLogic.at(receipt.logs.find(({ event }) => event == 'NewProxy').args.proxy);
+		const id        = web3.utils.randomHex(32);
+		const predicted = await this.factory.predict(id);
+		const master    = this.wallet.address;
+		const init      = this.wallet.contract.methods.initialize(alice).encodeABI();
+		const receipt   = await this.factory.instanciate(id, master, init, { from: alice });
+		expectEvent(receipt, 'NewProxy', { proxy: predicted });
 
+		const proxy = await WalletLogic.at(predicted);
 		expect(await proxy.owner()).to.be.equal(alice);
 		expect(await proxy.factory()).to.be.equal(this.factory.address);
 	});
 
 	describe('reset', function () {
-
 		beforeEach(async function () {
 			this.id     = web3.utils.randomHex(32);
 			this.master = this.wallet.address;
